@@ -1,5 +1,6 @@
 import {All, RGBActionType} from './app.actions';
 import {initialRGBState, RGBState} from './app.state';
+import {createFeatureSelector} from '@ngrx/store';
 
 export function rgbReducer(state = initialRGBState, action: All): RGBState {
   switch (action.type) {
@@ -27,6 +28,14 @@ export function rgbReducer(state = initialRGBState, action: All): RGBState {
         errorMessage: null
       };
     }
+    case RGBActionType.BLUE_SUB_1: {
+      return {
+        ...state,
+        color: 'Blue Color',
+        name: 'Blue is water',
+        errorMessage: null
+      };
+    }
     default: {
       return state;
     }
@@ -36,3 +45,5 @@ export function rgbReducer(state = initialRGBState, action: All): RGBState {
 export const reducers = {
   rgb: rgbReducer
 };
+
+export const selectRgbState = createFeatureSelector<RGBState>('rgb');

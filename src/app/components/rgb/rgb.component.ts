@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {Observable} from 'rxjs';
 import {Store} from '@ngrx/store';
-import {RGBState, selectRgbState} from '../../redux/app.state';
+import {RGBState} from '../../redux/app.state';
 import {Blue, Green, Red} from '../../redux/app.actions';
+import {selectRgbState} from '../../redux/app.reducers';
 
 @Component({
   selector: 'app-rgb',
@@ -25,14 +26,17 @@ export class RgbComponent implements OnInit {
   }
 
   redClick() {
+    console.log("red click");
     this.store.dispatch(new Red());
   }
 
   greenClick() {
+    console.log("green click");
     this.store.dispatch(new Green());
   }
 
   blueClick() {
+    console.log("blue click");
     this.store.dispatch(new Blue());
   }
 

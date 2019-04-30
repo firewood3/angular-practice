@@ -1,5 +1,3 @@
-import {createFeatureSelector} from '@ngrx/store/src/selector';
-
 export interface RGBState {
   color: string;
   name: string | null;
@@ -11,5 +9,3 @@ export const initialRGBState: RGBState = {
   name: null,
   errorMessage: null
 };
-
-export const selectRgbState = createFeatureSelector<RGBState>('rgb');

@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {Observable} from 'rxjs';
 import {Store} from '@ngrx/store';
-import {RGBState, selectRgbState} from '../../redux/app.state';
+import {RGBState} from '../../redux/app.state';
+import {selectRgbState} from '../../redux/app.reducers';
 
 @Component({
   selector: 'app-other',
