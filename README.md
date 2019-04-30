@@ -5,13 +5,8 @@
 4. [[외부 자료]](https://mherman.org/blog/authentication-in-angular-with-ngrx/)로그인 상태를 관리하기 위해 Ngrx 사용하기
 
 ***
-## Ngrx로 상태 관리하기
+## Ngrx의 Redux 패턴
 [Redux pattern 참고](https://jobs.zalando.com/tech/blog/design-patterns-redux/?gh_src=4n3gxh1)
-
-```code
-npm install @ngrx/store --save
-npm install @ngrx/effects --save
-```
 
 ### Redux 패턴 = singleton pattern(immutable) + observer pattern(reactive)
 ```code     
@@ -33,9 +28,14 @@ npm install @ngrx/effects --save
 
 ***
 ## Ngrx로 간단 상태 바꾸기
-Ngrx코드
+
+```code
+npm install @ngrx/store --save
+npm install @ngrx/effects --save
+```
+
+### State
 ```ts
-// ---- state 부분 ----
 export interface RGBState {
   color: string;
   name: string | null;
@@ -47,8 +47,10 @@ export const initialRGBState: RGBState = {
   name: null,
   errorMessage: null
 };
+```
 
-// ---- action 부분 ---- 
+### Action
+```ts
 export enum RGBActionType {
   RED = '[RGB] RED',
   GREEN = '[RGB] GREEN',
@@ -88,8 +90,10 @@ export type All =
   | Blue
   | BlueSub1
   | BlueSub2;
+```
 
-// ---- reduct 부분 ----
+### Reducer
+```ts
 export function rgbReducer(state = initialRGBState, action: All): RGBState {
   switch (action.type) {
     case RGBActionType.RED: {
@@ -135,9 +139,10 @@ export const reducers = {
 };
 
 export const selectRgbState = createFeatureSelector<RGBState>('rgb');
+```
 
-
-// ---- effects 코드 ----
+### Effects
+```ts
 @Injectable()
 export class RgbStateEffects {
 
@@ -170,8 +175,10 @@ export class RgbStateEffects {
     tap(value=>console.log('blue_sub_1', value))
   );
 }
+```
 
-// ---- NgModule 등록 ----
+### NgModule 등록
+```ts
 @NgModule({
   imports:[
     StoreModule.forRoot(reducers, {}),
@@ -180,7 +187,7 @@ export class RgbStateEffects {
 }) 
 ```
 
-Ngrx state호출
+### Ngrx state 사용
 ```ts
 @Component({
   selector: 'app-rgb',
@@ -219,6 +226,7 @@ export class RgbComponent implements OnInit {
 
 }
 ```
+
 
 ***
 ## CanActivate로 라우트 요청 검수하기
